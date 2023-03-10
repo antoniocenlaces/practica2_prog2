@@ -90,3 +90,43 @@ void mostrarInvertida(PilaEnt &p, const int anchura) {
                 << setfill(' ') << endl;
     }
 }
+
+// Pre:  p = [d_1, d_2, ..., d_K] AND K >= 0
+// Post: p = [d_2, ..., d_K]
+void eliminarFondo(PilaEnt &p) {
+    if(!estaVacia(p)){
+        int dato = cima(p);
+        desapilar(p);
+        if(!estaVacia(p)) {
+            eliminarFondo(p);
+            apilar(p, dato);
+        }
+    }
+}
+
+// Pre:  p = [d_1, ..., d_{(K-i)}, d_{(K-i+1)}, d_{(K-i+2)}, ..., d_K] AND 0<= K AND
+//      and  1<= i <= K
+// Post: p = [d_1, ..., d_{(K-i)}, d_{(K-i+2)}, ..., d_K]
+void eliminar(PilaEnt &p, const int i) {
+    if (numDatos(p) == i) {
+        desapilar(p);
+    } else {
+        int dato = cima(p);
+        desapilar(p);
+        eliminar(p, i);
+        apilar(p, dato);
+    }
+}
+
+// Pre:  p = [d_1, d_2, ..., d_K] AND K >= 0
+// Post: p = [nuevo, d_1, d_2, ..., d_K]
+void insertarEnFondo(PilaEnt &pila, const int nuevo) {
+    if (estaVacia(pila)){
+        apilar(pila, nuevo);
+    } else {
+        int dato = cima(pila);
+        desapilar(pila);
+        insertarEnFondo(pila, nuevo);
+        apilar(pila, dato);
+    }
+}
