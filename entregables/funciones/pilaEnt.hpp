@@ -12,7 +12,8 @@ const int DIM = 120;            // Redefinir su valor en caso necesario
 // de datos de enteros. Los datos son gestionados según una política LIFO,
 // es decir el último en ser apilado será el primero en ser desapilado.
 struct PilaEnt {
-            // completar la estructura de datos
+    int pila[DIM] = { 0 };
+    unsigned ocupadas = 0;
 };
 
 //  Notación empleada en la especificación de funciones:
